@@ -23,7 +23,7 @@ router.delete('/(:id)', (req, res) =>{
     var user = { id: req.params.id }
     
     //req.getConnection(function(error, conn) {
-        mysqlConnection.query('DELETE FROM category WHERE cat_id = ' + req.params.id, user, function(err, result) {
+        mysqlConnection.query('DELETE FROM category WHERE id = ' + req.params.id, user, function(err, result) {
             //if(err) throw err
             if (err) {
               console.log(err); 
@@ -37,9 +37,9 @@ router.delete('/(:id)', (req, res) =>{
 
    
     router.post('/category',function(req,res){
-        let user={cat_id:req.body.cat_id,complain_id:req.body.complain_id,compliment_id:req.body.compliment_id,suggestion_id:req.body.suggestion_id,complain:req.body.complain,suggestion:req.body.suggestion,rec_id:req.body.rec_id}
+        let user={id:req.body.id,name:req.body.name}
             if(!user){
-                return res.status(400).send({error:true,message: 'please insert category'});
+                return res.status(400).send({error:true,message: 'please insert category id'});
             }
             mysqlConnection.query("INSERT INTO category SET ?" ,[user],function(error,results,fields){
                 if(error) throw error;
@@ -50,7 +50,7 @@ router.delete('/(:id)', (req, res) =>{
 
 
     router.put('/category',function(req,res){
-        let user={cat_id:req.body.cat_id,complain_id:req.body.complain_id,compliment_id:req.body.compliment_id,suggestion_id:req.body.suggestion_id,complain:req.body.complain,suggestion:req.body.suggestion,rec_id:req.body.rec_id}
+        let user={id:req.body.id,name:req.body.name}
             if(!user){
                 return res.status(400).send({error:true,message: 'please insert category'});
             }
